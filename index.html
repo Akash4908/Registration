@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff); /* Sky-blue gradient */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 150px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      padding:10px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #444;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus {
+      border-color: #0072ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+    }
+    .btn {
+      width: 100%;
+      background: linear-gradient(to right, #0072ff, #00c6ff); /* Gradient Button */
+      color: #ffffff;
+      padding: 12px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+    .success-message {
+      display: none;
+      background: #e8f4ff;
+      padding: 20px;
+      border: 2px solid #0072ff;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .success-message h2 {
+      color: #0072ff;
+    }
+    .output {
+      background: #f2f9ff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+    }
+    .footer {
+      background: #0072ff;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      border-radius: 20px 20px 0 0;
+    }
+    .button-group {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .button-group .btn {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .button-group .btn:hover {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Registration Form</h1>
+  </div>
+  <div class="container">
+    <form id="registration-form">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+      </div>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+    <div class="success-message" id="success-message">
+      <h2>Registration Successful!</h2>
+      <p>Below is the information you provided:</p>
+      <div class="output" id="output"></div>
+      <div class="button-group">
+        
+        <button class="btn" id="go-home">Go Back </button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>&copy; 2024 Registration Form</p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#registration-form").submit(function(event) {
+        event.preventDefault();
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+        var dob = $("#dob").val();
+        var address = $("#address").val();
+        var output = `
+          <strong>Name:</strong> ${firstName} ${lastName}<br>
+          <strong>Email:</strong> ${email}<br>
+          <strong>Phone:</strong> ${phone}<br>
+          <strong>Date of Birth:</strong> ${dob}<br>
+          <strong>Address:</strong> ${address}
+        `;
+        $("#output").html(output);
+        $("#success-message").fadeIn();
+        $("#registration-form").fadeOut();
+      });
+
+      // Add Another Application
+      $("#add-another").click(function() {
+        $("#registration-form").trigger("reset"); // Reset the form
+        $("#registration-form").fadeIn();
+        $("#success-message").fadeOut();
+      });
+
+      // Go Back to Home Page
+      $("#go-home").click(function() {
+        window.location.href = "/"; // Replace "/" with your homepage URL if needed
+      });
+    });
+  </script>
+</body>
+</html>
